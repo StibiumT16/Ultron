@@ -115,7 +115,7 @@ def train_step(model, train_data):
             train_data[key] = train_data[key].to(device)
     input_ids = train_data["input_ids"]
     attention_mask = train_data["attention_mask"]
-    labels = train_data["docid_labels"]
+    labels = train_data["labels"]
 
     loss = model.forward(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
     return loss
@@ -205,7 +205,7 @@ def evaluate_beamsearch():
             
             input_ids = testing_data["input_ids"]
             if args.use_docid_rank == "False":
-                labels = testing_data["docid_labels"] # encoded docid
+                labels = testing_data["labels"] # encoded docid
                 truth.extend([[docid2string(docid)] for docid in labels.cpu().numpy().tolist()])
             else:
                 labels = testing_data["query_id"] # docid

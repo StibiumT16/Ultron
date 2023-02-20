@@ -32,7 +32,7 @@ class PretrainDataForT5(Dataset):
         return {
             "query_id": data['query_id'],
             "input_ids": np.array(data['input_ids']),
-            "docid_labels": np.array(data['docid_labels']),
+            "labels": np.array(data['labels']),
             "attention_mask": np.array(data['attention_mask']),
         }
 
@@ -54,6 +54,6 @@ class PretrainDataForT5(Dataset):
             "input_ids": padded_input_ids,
             "attention_mask": padded_attention_mask,
             "query_id": training_instance["query_id"],
-            "docid_labels": padded_docid_labels,
+            "labels": padded_docid_labels,
         }
         return new_instance
